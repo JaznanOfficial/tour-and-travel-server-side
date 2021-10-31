@@ -18,13 +18,15 @@ const run = async () => {
         await client.connect();
         const database = client.db('tour-and-travel');
         const placesCollection = database.collection('places');
+        
+        const ordersCollection = database.collection('orders');
         console.log('data is running here');
         // GET API
         app.get('/places', async(req, res) => {
             const cursor = placesCollection.find({});
             const places = await cursor.toArray();
             res.send(places);
-            res.send('hello world');
+            
         })
 
         // POST API
@@ -36,6 +38,23 @@ const run = async () => {
             console.log(result);
             res.json(result)
         })
+        // POST API
+        console.log('testing...');
+        app.post('/orders', async (req, res) => {
+            const order = req.body;
+            console.log(order);
+
+            const result = await ordersCollection.insertOne(order);
+            console.log(result);
+            res.json(result)
+        })
+
+        // GET API
+        app.get('/my-order', async (req, res) => {
+            const cursor = ordersCollection.find({});
+            const myOrder = await cursor.toArray();
+            res.send(myOrder);
+        })
        
     }
     finally {
@@ -43,6 +62,26 @@ const run = async () => {
     }
 }
 run().catch(console.dir);
+
+const order = async() => {
+    try {
+        await client.connect();
+       
+
+        
+
+
+
+
+    }
+    finally {
+        await client.close();
+      }
+    }
+    
+run().catch(console.dir);
+
+
 
 
 
