@@ -20,7 +20,7 @@ const run = async () => {
         const placesCollection = database.collection('places');
         
         const ordersCollection = database.collection('orders');
-        console.log('data is running here');
+        
         // GET API
         app.get('/places', async(req, res) => {
             const cursor = placesCollection.find({});
@@ -32,7 +32,7 @@ const run = async () => {
         // POST API
         app.post('/addPlaces', async (req, res) => {
             const place = req.body;
-            console.log(req.body);
+            
 
             const result = await placesCollection.insertOne(place);
             console.log(result);
@@ -42,10 +42,10 @@ const run = async () => {
         console.log('testing...');
         app.post('/orders', async (req, res) => {
             const order = req.body;
-            console.log(order);
+            
 
             const result = await ordersCollection.insertOne(order);
-            console.log(result);
+            
             res.json(result)
         })
 
@@ -63,23 +63,6 @@ const run = async () => {
 }
 run().catch(console.dir);
 
-const order = async() => {
-    try {
-        await client.connect();
-       
-
-        
-
-
-
-
-    }
-    finally {
-        await client.close();
-      }
-    }
-    
-run().catch(console.dir);
 
 
 
